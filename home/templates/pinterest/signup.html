@@ -1,0 +1,39 @@
+{% extends 'pinterest/base.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+    body{
+        background-image: url(/static/pinterest/images/bg3.svg);
+    }
+
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="col-md-6 mx-auto">
+   <div class="card signupform">
+       <div class="text-center my-2">
+        <a class="navbar-brand mx-auto text-danger"><img src="{% static 'pinterest/images/pilogo.png' %}" alt="" height="50px">P!xArt</a>
+       </div>
+       <div class="card-body">
+           <h3 class="card-title text-center alert alert-danger"style="color: red;">Sign Up here!</h3>
+           <div class="col-sm-10">
+            <form action="" method="POST" novalidate>
+                {% csrf_token %}
+                {% for forms in form %}
+                <div class="form-group">
+                   <strong>{{forms.label_tag}}</strong>
+                   {{forms}} 
+                   <h6 class="text-danger my-2">{{forms.errors|striptags}} </h6>
+                </div>
+                 {% endfor %}
+                 <input type="submit" value="Submit" class="btn btn-danger">
+           </form>
+       </div>
+   </div>
+
+</div>
+</div>
+{% endblock content %}

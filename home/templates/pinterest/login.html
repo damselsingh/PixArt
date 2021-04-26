@@ -1,0 +1,60 @@
+{% extends 'pinterest/base.html' %}
+{% load static %}
+{% block style %}
+<style>
+    body{
+        background-image: url(/static/pinterest/images/bg3.svg);
+    }
+
+</style>
+{% endblock style %}
+
+
+{% block content %}
+ <div class="container my-5">
+     <div class="row">
+         <div class="col-md-6 col-sm-12 col-xs-12 text-center my-2 mx-auto">
+            <div class="card loginform">
+                 <div class="card-body">
+                    <a class="navbar-brand my-2 text-danger"><img src="{% static 'pinterest/images/pilogo.png' %}" alt="" height="50px">P!xArt</a>
+                     <h3 class="card-title Home my-2" style="color: red;">Welcome Back!</h3>
+                     <h4 class="card-subtitle text-muted my-2">Sign in to your Account</h4>
+                     {% if messages %}
+                     {% for message in messages %}
+                     <div {% if message.tags %} class="alert alert-danger alert-dismissible fade show" {% endif %}>
+                      <strong>{{message}}</strong> 
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                         <span aria-hidden="true">&times;</span>
+                     </button>
+                     </div>
+                     {% endfor %}
+                     {% endif %}
+                <div class="my-2 text-left">
+                    <form action="" method="POST" novalidate>
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                        <ul class="alert alert-danger text-danger">
+                            {% for error in form.non_field_errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+
+                        {% for forms in form %}
+                        <div class="form-group">
+                           <strong>{{forms.label_tag}}</strong>
+                           {{forms}} 
+                           <h6 class="text-danger my-2">{{forms.errors|striptags}} </h6>
+                        </div>
+                         {% endfor %}
+                         <input type="submit" value="Login" class="btn btn-danger my-1">
+                   </form>
+                </div>
+                </div>
+            </div>
+         </div>
+
+     </div>
+ </div>
+{% endblock content %}

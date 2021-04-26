@@ -1,0 +1,41 @@
+{% extends 'pinterest/base.html' %}
+
+{% block content %}
+  <div class="container my-5">
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %} class="alert alert-danger alert-dismissible fade show" {% endif %}>
+     <strong>{{message}}</strong> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div class="row">
+        <div class="col-md-5 my-3">
+            <a href="{% url 'post' %}" class="btn btn-danger" title="go back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+            <a href="{% url 'password' %}" class="btn btn-danger" title="change password"><i class="fas fa-unlock-alt"></i></a>
+        </div>
+        <div class="col-md-7">
+           <div class="card">
+               <div class="card-body text-center">
+                   <h3 class="card-title"></h3>
+                   <h4 class="card-subtitle"></h4>
+                   <form action="" method="POST" novalidate>
+                    {% csrf_token %}
+                    {% for forms in form %}
+                    <div class="form-group">
+                       {{forms.label_tag}}
+                       {{forms}} 
+                       <h6 class="text-danger my-2">{{forms.errors|striptags}} </h6>
+                    </div>
+                     {% endfor %}
+                     <input type="submit" value="save" class="btn btn-danger my-2">
+               </form>
+               </div>
+           </div>
+        </div>
+    </div>
+  </div>
+{% endblock content %}

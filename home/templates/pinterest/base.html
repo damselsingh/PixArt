@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="height=device-height">
+    <title>PinYourInterest</title>
+    <link rel=icon type=image/png href='/static/pinterest/images/pilogo.png'>
+    <link rel="stylesheet" href="{% static 'pinterest/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'pinterest/css/bootstrap.css' %}">   
+    <link rel="stylesheet" href="{% static 'pinterest/css/animate.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Lemonada&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'pinterest/css/mystylesheet.css' %}">
+    {% block style %}
+    {% endblock style %}
+</head>
+<body>
+    {% include 'pinterest/navbar.html'%}
+   {% block content %}
+
+   {% endblock content %}
+
+
+<hr>
+  <footer class="text-center">
+      <div>
+       <h6 class="my-3 footer bg-light"> <img src="{% static 'pinterest/images/mylogo.png' %}" style="width: 60px;"> || Created by Riya Singh ||</h6>
+      </div>
+  </footer>
+  
+    <script src="{% static 'pinterest/js/jquery.js' %}"></script>
+    <script src="{% static 'pinterest/js/popper.js' %}"></script>
+    <script src="{% static 'pinterest/js/all.min.js' %}"></script>
+    <script src="{% static 'pinterest/js/bootstrap.js' %}"></script>
+  
+</body>
+</html>

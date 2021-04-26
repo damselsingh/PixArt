@@ -1,0 +1,49 @@
+
+svg{
+    overflow: hidden;
+}
+.navbar{
+    background-color: transparent;
+}
+.nav-item > a, .navbar-brand{
+    font-weight: 900;
+}
+.login{
+    border-radius: 32px;
+    background-color:red;
+    color: white;
+}
+.loginform, .signupform{
+    filter: drop-shadow(0px 5px 3px black);
+}
+.colo{
+    color: rgb(172, 172, 79);
+}
+#design, #hell{
+    animation: slideInUp 2s infinite;
+}
+.footer{
+    font-family: 'Lemonada', cursive;;
+}
+
+.Home{
+    font-family: 'Kaushan Script', cursive;
+}
+
+@media only screen and (max-width: 767px) {
+    #loginpage{
+        width: 200px;
+        height: auto;
+    }
+    .navbar-toggler .navbar-toggler-icon{
+        height: 20px !important;
+        width: 20px !important;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #loginpage{
+        width: 350px;
+        height: auto;
+    }
+}

@@ -1,0 +1,133 @@
+{% extends 'pinterest/base.html' %}
+
+{% block style %}
+<style>
+     body{
+       padding-bottom: 100px;
+     }
+    body{
+        background-image: url(/static/pinterest/images/bg.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+    }
+    .arrow{
+    top: 85%;
+    left: 90%;
+    position: fixed;
+}
+    .img-form{
+         color: rgb(107, 133, 248);
+    }
+    .list-group-item:hover{
+        background-color: red;
+        color: white;
+        text-decoration: none;
+     }
+     .list-group > a{
+         color: red;
+         font-weight: 500;
+     }
+    #lastbar{
+        visibility: hidden;
+    }
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #sidebar{
+        visibility: hidden;
+        clear: both;
+        float: left;
+        margin: 10px auto 5px 20px;
+        width: 28%;
+        display: none;
+    }
+    #lastbar{
+        visibility: visible;
+    }
+}
+@media only screen and (max-width: 767px) {
+    #sidebar{
+        visibility: hidden;
+        clear: both;
+        float: left;
+        margin: 10px auto 5px 20px;
+        width: 28%;
+        display: none;
+    }
+    #lastbar{
+        visibility: visible;
+    }
+}
+
+</style>
+{% endblock style %}
+
+{% block content %}
+<hr>
+
+<div class="container my-3">
+    <div class="row justify-content-center d-flex no-gutters">
+        <div class="col-md-3 my-2" id="sidebar">
+         <div class="card h-100">
+             <div class="card-body">
+                <ul class="list-group">
+                    <a href="{% url 'userprofile' %}">
+                        <li class="list-group-item text-center">
+                            <img src="/static/pinterest/images/admin.svg" width="80px" class="rounded-circle" alt="">
+                            {% if full_name == '' %}
+                            <h5>Anonymous</h5>
+                            {% else %}
+                            <h5>{{full_name}}</h5>
+                            {% endif %}
+                        </li>
+                        <div class="text-center my-2">
+                            <p class="badge badge-danger text-center">You logged in {{ct}} times</p>
+                        </div>
+                    </a>
+                    <a href="{% url 'feeds' %}"><li class="list-group-item">Feeds</li></a>
+                    <hr>
+                    <a href="{% url 'userprofile' %}"><li class="list-group-item">Your profile</li></a>
+                    <hr>
+                    <a href="{% url 'youruploads' %}"><li class="list-group-item">Your Uploads</li></a>
+                    <hr>
+                    <a href="{% url 'logout' %}"><li class="list-group-item">Logout</li></a>
+                </ul>
+             </div>
+         </div>
+        </div>
+        <div class="col-md-6 mx-auto">
+            {% if messages %}
+            {% for message in messages %}
+            <div {% if message.tags %} class="alert alert-danger alert-dismissible fade show" {% endif %}>
+             <strong>{{message}}</strong> 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <div class="card h-100 my-2">
+                <div class="card-body align-items-center text-center">
+                        <form action="" method='POST' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {% for fields in forms %}
+                                <div class="mt-2">
+                                    <strong class="text-danger">{{fields.label_tag}}</strong> <br>
+                                    {% if fields.name == 'image' %}
+                                    <i class="fa fa-upload fa-2x text-danger" aria-hidden="true">{{fields}}</i>
+                                    {% endif %}
+                                    {{fields}}   <br>
+                                    
+                                </div>
+                            {% endfor %}
+                            <input type="Submit" value="Post" class="btn btn-danger mt-1"> <br>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'pinterest/moboview.html' %}
+{% endblock content %}

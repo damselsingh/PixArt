@@ -1,0 +1,65 @@
+{% extends 'pinterest/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .image-thumbnail{
+          height: 200px;
+          object-fit: contain;
+        }
+  .jumbotron{
+    border-radius: 40px;
+  }
+  .jumbotron{
+    filter: drop-shadow(0px 5px 3px rgb(67, 90, 133));
+}
+.img-fluid{
+    filter: drop-shadow(0px 5px 3px rgb(46, 48, 51));
+}
+</style>
+    <hr>
+
+  
+    <div class="my-5">
+      <div class="container">
+        {% if messages %}
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-danger alert-dismissible fade show" {% endif %}>
+         <strong>{{message}}</strong> 
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <div class="mx-auto my-2">
+          <a href="{% url 'post' %}" class="btn btn-danger" title="go back"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
+        </div>
+       <h1 class="text-center Home"><u>Feeds</u></h1>
+        <div class="row">
+       {% if post %}
+       {% for posts in post %}
+      <div class="col-md-3 my-3">
+        <div class="jumbotron jumbotron-fluid h-100">
+          <div class="container text-center">
+            <img src="{{posts.image.url}}" alt="" class="image-thumbnail img-fluid">
+            <p class="text-left my-3">{{posts.caption}}</p>
+            <hr class="my-4">
+               <div class="text-left">
+                <h6 class="badge badge-danger">Posted by :- <u>{{posts.name}}</u></h6>
+                <h6 class="badge badge-danger">{{posts.date.date}}</h6>
+                <h6 class="badge badge-danger">{{posts.date.time}}</h6>
+                <a href="{{posts.image.url}}" title="download" class="text-danger" download="{{posts.image.url}}"><i class="fas fa-cloud-download-alt"></i></a>
+               </div>   
+          </div>
+        </div>
+      </div>
+       {% endfor %}
+       {% else %}
+           <div class="text-center mx-auto my-auto">
+            <img src="{% static 'pinterest/images/start.svg' %}" alt="">
+            <h4 class="alert alert-danger text-center my-3">Be the first to upload!</h4>
+           </div>
+       {% endif %}
+     
+  </div>
+{% endblock content %}
