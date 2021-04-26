@@ -1,4 +1,8 @@
 {% extends 'pinterest/base.html' %}
+{% block title %}
+<title>Welcome to PixArt| Your Profile</title>
+    {% endblock title %}
+
 
 {% block content %}
   <div class="container my-5">
@@ -20,8 +24,7 @@
         <div class="col-md-7">
            <div class="card">
                <div class="card-body text-center">
-                   <h3 class="card-title"></h3>
-                   <h4 class="card-subtitle"></h4>
+                   <h3 class="card-title alert alert-danger">Edit Your Profile</h3>
                    <form action="" method="POST" novalidate>
                     {% csrf_token %}
                     {% for forms in form %}
