@@ -26,7 +26,7 @@ SECRET_KEY = 'ri^#j1=^^aajh_!38@xl31_et=77j(hhtdzv1zo2a(nr7u@zeq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'pixy-arts.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
