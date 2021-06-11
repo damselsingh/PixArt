@@ -38,12 +38,18 @@ def post(request):
         
  
 def feed(request):
-     if request.user.is_authenticated:
-          post = People.objects.order_by('-id')
-          return render(request, 'pinterest/feeds.html', {'post': post})
+     if 'search' in request.GET:
+          search = request.GET['search']
+          # # case insensitive
+          if People.objects.filter(caption__icontains=search):
+               messages.success(request, 'you searched for ' + search)
+               post = People.objects.filter(caption__icontains=search)
+          else:
+               post = People.objects.order_by('-id')
+               messages.success(request, 'could not able to find... ' + search)
      else:
-          messages.success(request, 'login first!')
-          return HttpResponseRedirect('/login/')
+          post = People.objects.order_by('-id')
+     return render(request, 'pinterest/feeds.html', {'post': post})
           
 
 
